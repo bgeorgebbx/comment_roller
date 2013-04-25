@@ -1,0 +1,37 @@
+extend layout/layout
+block content
+	h2#newMessages(data-bind="text: notifications")
+	#comments(data-bind="foreach: tweets")
+		div.tweet
+			p.screenName(data-bind="text: screen_name")
+			p.tweetText(data-bind="text: text")
+
+	script
+		var socket = io.connect('192.168.0.227:3000');
+		
+		function tweetsViewModel() {
+
+			var self = this; 
+
+			self.tweets = ko.observableArray();
+			self.notifications = ko.observable(0);
+			self.addTweet = function( data ) {
+				data.id = self.tweets.length + 1;
+				self.tweets.push( data );
+				self.notifications++;
+				console.log(notifications);
+			};
+
+		};
+
+		var tweetViewModel = {
+
+		};
+
+		socket.on('newPost', function(data) {			
+			tweetsViewModel.addTweet(data);
+			console.log(data);
+		});
+
+		ko.applyBindings( tweetsViewModel );
+		

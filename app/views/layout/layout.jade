@@ -1,0 +1,13 @@
+!!!5
+html
+	head
+		title #{title} Comments
+		link(rel='stylesheet', href='/css/style.css')
+		script(src="/socket.io/socket.io.js")
+		script(src="/scripts/knockout.js")
+	body
+		header
+			h1 Comments
+		.container
+			.main-content
+				block content
