@@ -21,11 +21,12 @@ block content
 				self.notifications++;
 				console.log(notifications);
 			};
+		}
 
-		};
-
-		var tweetViewModel = {
-
+		var tweetViewModel = function(data) {
+			var self = this;
+			self.screen_name = data.screen_name;
+			self.text = data.text;
 		};
 
 		socket.on('newPost', function(data) {			
